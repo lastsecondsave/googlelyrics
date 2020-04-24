@@ -1,0 +1,21 @@
+{
+    "folders": [
+        {
+            "path": ".",
+            "folder_exclude_patterns": [
+            	"__pycache__",
+                ".pytest_cache",
+                ".venv"
+            ]
+        }
+    ],
+    "build_systems": [
+        {
+            "name": "googlelyrics - pylint",
+            "target": "pylint",
+            "cmd": [
+                "googlelyrics"
+            ]
+        }
+    ]
+}

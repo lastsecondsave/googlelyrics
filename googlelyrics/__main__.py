@@ -5,7 +5,7 @@ from .search import search
 
 
 def parse_args():
-    parser = ArgumentParser()
+    parser = ArgumentParser(prog='googlelyrics')
 
     parser.add_argument("--no-header", action="store_true",
                         help="don't print the info header")

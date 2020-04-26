@@ -1,13 +1,7 @@
 {
     "folders": [
         {
-            "path": ".",
-            "folder_exclude_patterns": [
-            	"__pycache__",
-                ".pytest_cache",
-                ".venv",
-                "*.egg-info"
-            ]
+            "path": "."
         }
     ],
     "build_systems": [

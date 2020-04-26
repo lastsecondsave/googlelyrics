@@ -28,7 +28,7 @@ def main():
         sys.exit("No lyrics found")
 
     if not args.no_header:
-        print(f"{lyrics.author} - {lyrics.title}\n")
+        print(f"{lyrics.artist} - {lyrics.title}\n")
 
     print("\n".join(lyrics.lines))
 

@@ -6,7 +6,7 @@ setup(
     description="Grab lyrics from Google search results.",
     author="lastsecondsave",
     packages=["googlelyrics"],
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     install_requires=[
         "requests>=2.22.0",
         "beautifulsoup4>=4.9.0"

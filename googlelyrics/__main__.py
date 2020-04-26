@@ -1,7 +1,7 @@
 import sys
 from argparse import ArgumentParser
 
-from .search import search
+from . import search
 
 
 def parse_args():
@@ -20,14 +20,17 @@ def main():
     args = parse_args()
 
     try:
-        text = search(" ".join(args.query), header=not args.no_header)
+        lyrics = search(" ".join(args.query))
     except BaseException:
         sys.exit(sys.exc_info()[1])
 
-    if not text:
+    if not lyrics:
         sys.exit("No lyrics found")
 
-    print(text, end="")
+    if not args.no_header:
+        print(f"{lyrics.author} - {lyrics.title}\n")
+
+    print("\n".join(lyrics.lines))
 
 
 if __name__ == "__main__":

@@ -1,7 +1,17 @@
+from dataclasses import dataclass
+from typing import List
+
 import requests
 from bs4 import BeautifulSoup
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0"
+
+
+@dataclass
+class Lyrics:
+    title: str
+    author: str
+    lines: List[str]
 
 
 def find_containers(soup):
@@ -22,14 +32,14 @@ def extract_blocks(container):
     return blocks
 
 
-def extract_header(container):
+def extract_header_info(container):
     title = container.find(attrs={"data-attrid": "title"}).find("span").text
     artist = container.find(attrs={"data-attrid": "subtitle"}).find("a").text
 
-    return f"{artist} - {title}"
+    return (title, artist)
 
 
-def search(query, header=True):
+def search(query):
     if "lyrics" not in query:
         query = f"{query} lyrics"
 
@@ -48,12 +58,12 @@ def search(query, header=True):
 
     lines = []
 
-    if header:
-        lines.append(extract_header(header_container))
-        lines.append("")
-
     for block in extract_blocks(lyrics_container):
-        lines.extend(line.text for line in block.find_all("span"))
-        lines.append("")
+        if lines:
+            lines.append("")
 
-    return "\n".join(lines)
+        lines.extend(line.text for line in block.find_all("span"))
+
+    title, artist = extract_header_info(header_container)
+
+    return Lyrics(title, artist, lines)

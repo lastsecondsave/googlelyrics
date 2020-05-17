@@ -11,6 +11,14 @@
             "cmd": [
                 "googlelyrics"
             ]
+        },
+        {
+            "name": "googlelyrics - black",
+            "target": "python",
+            "module": "black",
+            "cmd": [
+                "$project_path"
+            ]
         }
     ]
 }

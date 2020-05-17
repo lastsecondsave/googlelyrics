@@ -5,12 +5,12 @@ from . import search
 
 
 def parse_args():
-    parser = ArgumentParser(prog='googlelyrics')
+    parser = ArgumentParser(prog="googlelyrics")
 
-    parser.add_argument("--no-header", action="store_true",
-                        help="don't print the info header")
-    parser.add_argument("query", type=str, nargs="+",
-                        help="search query")
+    parser.add_argument(
+        "--no-header", action="store_true", help="don't print the info header"
+    )
+    parser.add_argument("query", type=str, nargs="+", help="search query")
 
     return parser.parse_args()
 

@@ -7,13 +7,6 @@ setup(
     author="lastsecondsave",
     packages=["googlelyrics"],
     python_requires=">=3.7",
-    install_requires=[
-        "requests>=2.22.0",
-        "beautifulsoup4>=4.9.0"
-    ],
-    entry_points={
-        "console_scripts": [
-            "googlelyrics = googlelyrics.__main__:main"
-        ]
-    }
+    install_requires=["requests>=2.22.0", "beautifulsoup4>=4.9.0"],
+    entry_points={"console_scripts": ["googlelyrics = googlelyrics.__main__:main"]},
 )

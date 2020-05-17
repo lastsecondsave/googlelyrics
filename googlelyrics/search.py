@@ -4,7 +4,9 @@ from typing import List
 import requests
 from bs4 import BeautifulSoup
 
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0"
+USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0"
+)
 
 
 @dataclass
@@ -43,9 +45,11 @@ def search(query):
     if "lyrics" not in query:
         query = f"{query} lyrics"
 
-    rsp = requests.get("https://www.google.com/search",
-                       params={"q": query},
-                       headers={"user-agent": USER_AGENT})
+    rsp = requests.get(
+        "https://www.google.com/search",
+        params={"q": query},
+        headers={"user-agent": USER_AGENT},
+    )
 
     rsp.raise_for_status()
 

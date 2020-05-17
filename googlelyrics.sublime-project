@@ -1,24 +1,16 @@
 {
-    "folders": [
-        {
-            "path": "."
-        }
-    ],
-    "build_systems": [
-        {
-            "name": "googlelyrics - pylint",
-            "target": "pylint",
-            "cmd": [
-                "googlelyrics"
-            ]
-        },
-        {
-            "name": "googlelyrics - black",
-            "target": "python",
-            "module": "black",
-            "cmd": [
-                "$project_path"
-            ]
-        }
-    ]
+  "folders": [{ "path": "." }],
+  "build_systems": [
+    {
+      "name": "googlelyrics - pylint",
+      "target": "pylint",
+      "cmd": ["googlelyrics"]
+    },
+    {
+      "name": "googlelyrics - black",
+      "target": "python",
+      "module": "black",
+      "cmd": ["$project_path"]
+    }
+  ]
 }

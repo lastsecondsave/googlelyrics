@@ -31,6 +31,7 @@ def main():
         print(f"{lyrics.artist} - {lyrics.title}\n")
 
     print("\n".join(lyrics.lines))
+    print()
 
 
 if __name__ == "__main__":

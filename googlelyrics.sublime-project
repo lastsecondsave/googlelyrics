@@ -4,6 +4,7 @@
     {
       "name": "googlelyrics - pylint",
       "target": "pylint",
+      "working_dir": "$project_path",
       "cmd": ["googlelyrics"]
     },
     {
@@ -11,6 +12,13 @@
       "target": "python",
       "module": "black",
       "cmd": ["$project_path"]
+    },
+    {
+      "name": "googlelyrics - pytest",
+      "target": "python",
+      "module": "pytest",
+      "working_dir": "$project_path",
+      "cmd": ["-v"]
     }
   ]
 }

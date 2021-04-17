@@ -7,7 +7,7 @@ def test_lyrics():
     assert lyrics.artist == "Oasis"
     assert lyrics.title == "Hello"
 
-    assert len(lyrics.lines) == 38
+    assert len(lyrics.lines) > 30
     assert lyrics.lines[0] == "I don't feel as if I know you"
     assert lyrics.lines[-1] == "Hello, hello, hello"
 

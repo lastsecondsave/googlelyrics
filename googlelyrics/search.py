@@ -34,9 +34,13 @@ def extract_blocks(container):
     return blocks
 
 
+def extract_attrid_text(container, attrid):
+    return container.find(attrs={"data-attrid": attrid}).contents[0].text
+
+
 def extract_header_info(container):
-    title = container.find(attrs={"data-attrid": "title"}).find("span").text
-    artist = container.find(attrs={"data-attrid": "subtitle"}).find("a").text
+    title = extract_attrid_text(container, "title")
+    artist = extract_attrid_text(container, "subtitle")
 
     return (title, artist)
 

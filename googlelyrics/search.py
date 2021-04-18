@@ -70,7 +70,7 @@ def search(query):
         if lines:
             lines.append("")
 
-        lines.extend(line.text for line in block.find_all("span"))
+        lines.extend(line.text.strip() for line in block.find_all("span"))
 
     title, artist = extract_header_info(header_container)
 

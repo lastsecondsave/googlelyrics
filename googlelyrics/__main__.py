@@ -19,10 +19,7 @@ def parse_args():
 def main():
     args = parse_args()
 
-    try:
-        lyrics = search(" ".join(args.query))
-    except BaseException:
-        sys.exit(sys.exc_info()[1])
+    lyrics = search(" ".join(args.query))
 
     if not lyrics:
         sys.exit("No lyrics found")

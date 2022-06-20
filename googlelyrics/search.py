@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 USER_AGENT = (
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0"
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0"
 )
 
 
@@ -16,33 +16,29 @@ class Lyrics:
     lines: List[str]
 
 
-def find_containers(soup):
+def find_lyrics(soup):
     container = soup.find(attrs={"data-attrid": "kc:/music/recording_cluster:lyrics"})
-
     if not container:
-        return (None, None)
+        return None
 
-    lyrics_container = container.find(lambda tag: tag.has_attr("data-lyricid"))
-    header_container = container.parent.parent.previous_sibling
-
-    return (lyrics_container, header_container)
+    container = container.find(lambda tag: tag.has_attr("data-lyricid"))
+    return container.contents[0].contents[1].contents
 
 
-def extract_blocks(container):
-    blocks = list(container.contents[0])[:-1]
-    blocks.extend(container.contents[1])
-    return blocks
+def find_attrid(soup, data_attrid):
+    container = soup.find(attrs={"data-attrid": data_attrid})
+    if not container:
+        return None
+
+    return container.contents[0].text
 
 
-def extract_attrid_text(container, attrid):
-    return container.find(attrs={"data-attrid": attrid}).contents[0].text
+def find_title(soup):
+    return find_attrid(soup, "title")
 
 
-def extract_header_info(container):
-    title = extract_attrid_text(container, "title")
-    artist = extract_attrid_text(container, "subtitle")
-
-    return (title, artist)
+def find_artist(soup):
+    return find_attrid(soup, "subtitle")
 
 
 def search(query):
@@ -52,26 +48,29 @@ def search(query):
     rsp = requests.get(
         "https://www.google.com/search",
         params={"q": query},
-        headers={"user-agent": USER_AGENT},
+        headers={"User-Agent": USER_AGENT},
     )
 
     rsp.raise_for_status()
 
     soup = BeautifulSoup(rsp.text, features="html.parser")
-
-    lyrics_container, header_container = find_containers(soup)
+    lyrics_container = find_lyrics(soup)
 
     if not lyrics_container:
         return None
 
     lines = []
 
-    for block in extract_blocks(lyrics_container):
+    for block in lyrics_container:
         if lines:
             lines.append("")
 
         lines.extend(line.text.strip() for line in block.find_all("span"))
 
-    title, artist = extract_header_info(header_container)
+    artist = find_artist(soup)
+    title = find_title(soup)
+
+    if artist:
+        artist = artist.split(" ", 2)[2]
 
     return Lyrics(title, artist, lines)
